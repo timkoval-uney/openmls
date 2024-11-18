@@ -573,14 +573,9 @@ fn keys_for_welcome<Provider: OpenMlsProvider>(
         .find_map(|egs| {
             let hash_ref = egs.new_member();
 
-            transpose_err_opt(
-                provider
-                    .storage()
-                    .key_package(&hash_ref)
-                    .map_err(WelcomeError::StorageError),
-            )
+            provider.storage().key_package(&hash_ref).ok().flatten()
         })
-        .ok_or(WelcomeError::NoMatchingKeyPackage)??;
+        .ok_or(WelcomeError::NoMatchingKeyPackage)?;
     if !key_package_bundle.key_package().last_resort() {
         provider
             .storage()
