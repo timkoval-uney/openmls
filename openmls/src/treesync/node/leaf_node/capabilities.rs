@@ -278,6 +278,7 @@ pub(crate) fn default_extensions() -> Vec<ExtensionType> {
         ExtensionType::RequiredCapabilities,
         ExtensionType::ExternalPub,
         ExtensionType::ExternalSenders,
+        ExtensionType::LastResort,
     ]
 }
 
